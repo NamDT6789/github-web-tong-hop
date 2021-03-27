@@ -1,0 +1,66 @@
+FM,Submission ID,Submission Time,Fingerprint,Device Code,Carrier,Country,Reviewer,CSC Type,Modem Version,CSC Version,Reviewed Time,Approved Time,Status,S/W PL Email,S/W PL Group,Approval Type,Log,Comments
+No,5531704720097280,2019-11-14 11:51:24 KST,samsung/a30seea/a30s:9/PPR1.180610.011/A307FNXXS2ASK1:user/release-keys,a30seea,"PHE,TPH,ITV,PHN,LUX,NEE,ATO,XEO,EUR,BGL,ROM,XEZ,XEH,SEB,ORX,SIO","Austria,Bulgaria,Czech Republic,Greece,Hungary,Italy,Latvia,Luxembourg,Netherlands,Poland,Portugal,Romania,Slovakia,Slovenia,Spain,Sweden",trung.nd3@samsung.com,Normal,"A307FNXXS2ASK1
+","A307FNOEM2ASK2
+",N/A,N/A,Submitted,"song.van@samsung.com ",SVMC,SMR,"[svmc.gba@samsung.com 2019-11-14 11:51:12 KST]: New
+[svmc.gba@samsung.com 2019-11-14 11:51:23 KST]: Submitted
+",
+No,4513720161533952,2019-11-14 11:00:04 KST,samsung/a70qxx/a70q:9/PPR1.180610.011/A705FNXXS4ASK3:user/release-keys,a70qxx,MBM,Macedonia,trung.nd3@samsung.com,SuperSet,"A705FNXXS4ASK1
+","A705FNODX4ASK3
+",N/A,N/A,Submitted,vandang.ng@samsung.com,SVMC,SMR,"[svmc.gba@samsung.com 2019-11-14 10:59:52 KST]: New
+[svmc.gba@samsung.com 2019-11-14 11:00:04 KST]: Submitted
+",
+No,4888225925038080,2019-11-13 20:53:37 KST,samsung/a30seea/a30s:9/PPR1.180610.011/A307FNXXS2ASK4:user/release-keys,a30seea,NEE,Sweden,trung.nd3@samsung.com,Normal,"A307FNXXS2ASK1
+","A307FNOEM2ASK4
+",N/A,N/A,Submitted,song.van@samsung.com,song.van@samsung.com;kimlan.tr@samsung.com;letrung.hieu@samsung.com;anh.td@samsung.com;anh.tna@samsung.com,SMR,"[svmc.gba@samsung.com 2019-11-13 20:53:28 KST]: New
+[svmc.gba@samsung.com 2019-11-13 20:53:37 KST]: Submitted
+",
+No,5001697618821120,2019-11-13 19:14:05 KST,samsung/a30sxx/a30s:9/PPR1.180610.011/A307FNXXS2ASK2:user/release-keys,a30sxx,"XSG,TUR,MID,KSA,EGY,ILO,PAK,AFG,MWD,FWD,TKD,LYS,BTC,TUN,XFV,XFA,ACR,DKR,ECT,XFE,SRR","Afghanistan,Algeria,Egypt,Ghana,Iraq,Israel,Jordan,Libya,Morocco,Nigeria,Pakistan,Saudi Arabia,Senegal,South Africa,Tunisia,Turkey,United Arab Emirates",trung.nd3@samsung.com,SuperSet,"A307FNXXS2ASK1
+","A307FNOJM2ASK2
+",N/A,N/A,Submitted,ngv.dat@samsung.com,SVMC,SMR,"[svmc.gba@samsung.com 2019-11-13 19:13:54 KST]: New
+[svmc.gba@samsung.com 2019-11-13 19:14:04 KST]: Submitted
+[ly.ltt@samsung.com 2019-11-14 11:45:20 KST]: Pending
+[svmc.gba@samsung.com 2019-11-14 12:06:43 KST]: Edited
+[svmc.gba@samsung.com 2019-11-14 12:06:53 KST]: Submitted
+","
+[ly.ltt@samsung.com 2019-11-14 11:45:20 KST]Pending: Feedback sent"
+No,4897604254564352,2019-11-13 17:50:07 KST,samsung/a70qeea/a70q:9/PPR1.180610.011/A705FNXXS4ASK2:user/release-keys,a70qeea,"AMO,FTM,OPV,ORO,ORS","France,Poland,Romania,Slovakia,Spain",trung.nd3@samsung.com,SuperSet,"A705FNXXS4ASK1
+","A705FNOTF4ASK1
+",N/A,N/A,Submitted,tien.duc@samsung.com,SVMC,SMR,"[svmc.gba@samsung.com 2019-11-13 17:49:57 KST]: New
+[svmc.gba@samsung.com 2019-11-13 17:50:07 KST]: Submitted
+",
+No,6405378293628928,2019-11-13 16:19:28 KST,samsung/a30sxx/a30s:9/PPR1.180610.011/A307FNXXS2ASK1:user/release-keys,a30sxx,"SEE,CAC,CAU,SEK,SKZ","Georgia,Kazakhstan,Serbia,Ukraine,Uzbekistan",trung.nd3@samsung.com,SuperSet,"A307FNXXS2ASK1
+","A307FNOXM2ASK5
+",N/A,N/A,Approved,anh.tna@samsung.com,SVMC,SMR,"[svmc.gba@samsung.com 2019-11-13 16:19:16 KST]: New
+[svmc.gba@samsung.com 2019-11-13 16:19:27 KST]: Submitted
+[trung.nd3@samsung.com 2019-11-13 17:58:34 KST]: Reviewed
+[ApprovalBot 2019-11-13 21:09:31 KST]: Approved
+",
+No,6419884411453440,2019-11-13 15:13:00 KST,samsung/a70qdx/a70q:9/PPR1.180610.011/A705FXXS4ASK1:user/release-keys,a70qdx,"XME,THL,MYM,CAM,LAO","Cambodia,Laos,Malaysia,Myanmar,Thailand",trung.nd3@samsung.com,SuperSet,"A705FXXS4ASK1
+","A705FOLM4ASK1
+",N/A,N/A,Approved,chuc.tt@samsung.com,SVMC,SMR,"[svmc.gba@samsung.com 2019-11-13 15:12:49 KST]: New
+[svmc.gba@samsung.com 2019-11-13 15:12:59 KST]: Submitted
+[trung.nd3@samsung.com 2019-11-13 16:01:48 KST]: Reviewed
+[ApprovalBot 2019-11-13 21:09:13 KST]: Approved
+",
+No,4793563235221504,2019-11-13 11:59:33 KST,samsung/a40eea/a40:9/PPR1.180610.011/A405FNXXU2ASJ6:user/release-keys,a40eea,"BTB,BTE,EVR",United Kingdom,trung.nd3@samsung.com,SuperSet,,,N/A,N/A,Pending,dang.snam@samsung.com,SVMC,NormalException,"null[svmc.gba@samsung.com 2019-11-13 11:57:31 KST]: New
+[svmc.gba@samsung.com 2019-11-13 11:57:37 KST]: Passed
+[svmc.gba@samsung.com 2019-11-13 11:57:56 KST]: Blocked
+[svmc.gba@samsung.com 2019-11-13 11:58:35 KST]: Passed
+[svmc.gba@samsung.com 2019-11-13 11:59:32 KST]: Submitted
+[mai.dth@samsung.com 2019-11-13 16:12:20 KST]: Pending
+","
+[svmc.gba@samsung.com 2019-11-13 11:57:56 KST]: Blocked
+[svmc.gba@samsung.com 2019-11-13 11:58:35 KST]Passed: Rule Check passed
+[mai.dth@samsung.com 2019-11-13 16:12:20 KST]Pending: Feedback sent"
+No,4703537583357952,2019-11-13 11:20:04 KST,samsung/a20eeea/a20e:9/PPR1.180610.011/A202FXXU2ASK1:user/release-keys,a20eeea,"BTB,BTE,EVR",United Kingdom,trung.nd3@samsung.com,SuperSet,,,N/A,N/A,Approved,ba.dat@samsung.com,SVMC,NormalException,"null[svmc.gba@samsung.com 2019-11-13 11:18:40 KST]: New
+[svmc.gba@samsung.com 2019-11-13 11:18:47 KST]: Passed
+[svmc.gba@samsung.com 2019-11-13 11:20:03 KST]: Submitted
+[trung.nd3@samsung.com 2019-11-13 16:39:34 KST]: Approved
+",
+No,4799172932272128,2019-11-13 11:02:42 KST,samsung/a70qeea/a70q:9/PPR1.180610.011/A705FNXXS4ASK2:user/release-keys,a70qeea,"O2U,XEC","Spain,United Kingdom",trung.nd3@samsung.com,SuperSet,"A705FNXXS4ASK1
+","A705FNOTF4ASK1
+",N/A,N/A,Pending,chinh.hoa@samsung.com,SVMC,SMR,"[svmc.gba@samsung.com 2019-11-13 11:02:33 KST]: New
+[svmc.gba@samsung.com 2019-11-13 11:02:41 KST]: Submitted
+[mai.dth@samsung.com 2019-11-13 18:07:29 KST]: Pending
+","
+[mai.dth@samsung.com 2019-11-13 18:07:29 KST]Pending: Feedback sent"
