@@ -26,6 +26,7 @@ class FirstModelController extends Controller {
 		])->orderByDesc('id')->paginate('20');
 		$countTotal = $items->total();
 		$first_model = $this->getResponse($items);
+//		@dd($first_model);
 		$total_reviewer = $this->getTotalReviewer();
 		return view('first_model.index', compact('items', 'first_model', 'status', 'reviewer', 'countTotal', 'user_name', 'total_reviewer'));
 	}
@@ -84,8 +85,16 @@ class FirstModelController extends Controller {
 		$first_model->device_code = $params['device_code'];
 		$first_model->model_name = $params['model_name'];
 		$first_model->sale_code = $params['sale_code'];
-        $first_model->check_file_cts = $params['check_file_reviewer'];
-        $first_model->check_list = $params['check_list_reviewer'];
+		if ($params['check_file_reviewer']) {
+            $first_model->check_file_cts = implode(',', $params['check_file_reviewer']);
+        } else {
+            $first_model->check_file_cts = null;
+        }
+        if ($params['check_list_reviewer']) {
+            $first_model->check_list = implode(',', $params['check_list_reviewer']);
+        } else {
+            $first_model->check_list = null;
+        }
         $first_model->asignment = null;
         $first_model->ratio_assignment = 0;
         $first_model->ratio_check_file = FirstModel::RATIO_CHECK_FILE_SIM;
