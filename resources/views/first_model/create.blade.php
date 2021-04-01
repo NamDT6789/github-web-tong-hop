@@ -51,9 +51,10 @@
 	                    		<div class="col-md-6">
 		                    		<div class="form-group">
 										<label>Check file & CTS-V</label>
+										<br />
 										<!--<select class="form-control" name="check_file_reviewer" id="check_file" onchange ="removeReviewer()">-->
-			                            <select class="form-control" name="check_file_reviewer" id="check_file">
-			                            	<option value=""></option>
+			                            <select style="width: 100%" class="form-control check-file-select2" name="check_file_reviewer[]" id="check_file" multiple="multiple">
+			                            	{{--<option value=""></option>--}}
 			                            	@foreach($reviewer as $key => $value)
 		                                        <option value="{!! $key !!}">{!! $value !!}</option>
 		                                    @endforeach
@@ -64,8 +65,8 @@
 		                    		<div class="form-group">
 										<label>Check list</label>
 										<!--<select class="form-control" name="check_list_reviewer" id="check_list" onchange="removeReviewer()">-->
-			                            <select class="form-control" name="check_list_reviewer" id="check_list">
-			                            	<option value=""></option>
+			                            <select style="width: 100%" class="form-control check-list-select2" name="check_list_reviewer[]" id="check_list" multiple="multiple">
+			                            	{{--<option value=""></option>--}}
 			                            	@foreach($reviewer as $key => $value)
 		                                        <option value="{!! $key !!}">{!! $value !!}</option>
 		                                    @endforeach
@@ -105,6 +106,10 @@
         </div>
     </div>
     <script type="text/javascript">
+        $(document).ready(function() {
+            $('.check-file-select2').select2();
+            $('.check-list-select2').select2();
+        });
     	function typeFirstModel(key) {
     		if (key === 2) {
     			$('#type_all').css({'display':'none'});
@@ -114,27 +119,27 @@
     			$('#type_variant').css({'display':'none'});
     		}
     	}
-    	function removeReviewer() {
-    		var select_check_file = document.getElementById("check_file");
-    		var select_check_list = document.getElementById("check_list");
-    		var id_reviewer_check_file = select_check_file.options[select_check_file.selectedIndex].value;
-    		var id_reviewer_check_list = select_check_list.options[select_check_list.selectedIndex].value;
-
-    		if (id_reviewer_check_file) {
-    			for (var i=0; i<select_check_list.length; i++) {
-				    if (select_check_list.options[i].value === id_reviewer_check_file)
-				        select_check_list.remove(i);
-				}
-    		}
-
-    		if (id_reviewer_check_list) {
-    			for (var i=0; i<select_check_file.length; i++) {
-				    if (select_check_file.options[i].value === id_reviewer_check_list)
-				        select_check_file.remove(i);
-				}
-    		}
-
-    	}
+    	// function removeReviewer() {
+    	// 	var select_check_file = document.getElementById("check_file");
+    	// 	var select_check_list = document.getElementById("check_list");
+    	// 	var id_reviewer_check_file = select_check_file.options[select_check_file.selectedIndex].value;
+    	// 	var id_reviewer_check_list = select_check_list.options[select_check_list.selectedIndex].value;
+		//
+    	// 	if (id_reviewer_check_file) {
+    	// 		for (var i=0; i<select_check_list.length; i++) {
+		// 		    if (select_check_list.options[i].value === id_reviewer_check_file)
+		// 		        select_check_list.remove(i);
+		// 		}
+    	// 	}
+		//
+    	// 	if (id_reviewer_check_list) {
+    	// 		for (var i=0; i<select_check_file.length; i++) {
+		// 		    if (select_check_file.options[i].value === id_reviewer_check_list)
+		// 		        select_check_file.remove(i);
+		// 		}
+    	// 	}
+		//
+    	// }
 
     	$.ajaxSetup({
 	        headers: {
