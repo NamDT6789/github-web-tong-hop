@@ -40,6 +40,23 @@ class FirstModel extends Model
 	const RATIO_CHECK_LIST_SIM = 40;
 	const RATIO_CHECK_FILE_FULL = 50;
 	const RATIO_CHECK_LIST_FULL = 50;
+
+    public function reviewer_model(){
+        return $this->hasMany(ReviewerModel::class,'first_model_id','id');
+    }
+
+    public static function getPercent($type, $arrTotal) {
+        switch ($type) {
+            case 0:
+                $percent = floor(50 / $arrTotal);
+                return $percent;
+            case 1:
+                $percentFullFM = floor(85 / $arrTotal);
+                return $percentFullFM;
+        }
+//        return self::ARRAY_STATUS;
+    }
+
 	/**
 	 * @return array
 	 */
@@ -65,4 +82,10 @@ class FirstModel extends Model
 			return array_keys(self::ARRAY_STATUS, $value);
 		}
 	}
+
+    public static function countPercent($value = null) {
+        if (in_array($value, self::ARRAY_STATUS)) {
+            return array_keys(self::ARRAY_STATUS, $value);
+        }
+    }
 }

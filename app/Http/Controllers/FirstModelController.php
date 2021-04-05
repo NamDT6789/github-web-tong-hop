@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\FirstModel;
+use App\ReviewerModel;
 use App\Submission;
 use Auth;
 use Illuminate\Http\Request;
@@ -23,10 +24,11 @@ class FirstModelController extends Controller {
 		$reviewer = Submission::getReviewer();
 		$items = FirstModel::query()->select([
 			'id', 'submission_id', 'device_code', 'model_name', 'sale_code', 'check_file_cts', 'check_list', 'asignment', 'status','ratio_assignment','ratio_check_file','ratio_check_list',  'type', 'created_at', 'updated_at',
-		])->orderByDesc('id')->paginate('20');
+		])->orderByDesc('id')->paginate('10');
+//		dd($items);
 		$countTotal = $items->total();
+//        $first_model = $items;
 		$first_model = $this->getResponse($items);
-//		@dd($first_model);
 		$total_reviewer = $this->getTotalReviewer();
 		return view('first_model.index', compact('items', 'first_model', 'status', 'reviewer', 'countTotal', 'user_name', 'total_reviewer'));
 	}
@@ -44,8 +46,8 @@ class FirstModelController extends Controller {
 					'device_code' => $item['device_code'],
 					'model_name' => $item['model_name'],
 					'sale_code' => $item['sale_code'],
-					'check_file_cts' => Submission::getValueReviewer($item['check_file_cts']),
-					'check_list' => Submission::getValueReviewer($item['check_list']),
+					'check_file_cts' => $item->reviewer_model,
+					'check_list' => $item->reviewer_model,
 					'asignment' => Submission::getValueReviewer($item['asignment']),
 					'status' => FirstModel::getValueStatus($item['status']),
 					'type' => $item['type'],
@@ -85,16 +87,7 @@ class FirstModelController extends Controller {
 		$first_model->device_code = $params['device_code'];
 		$first_model->model_name = $params['model_name'];
 		$first_model->sale_code = $params['sale_code'];
-		if ($params['check_file_reviewer']) {
-            $first_model->check_file_cts = implode(',', $params['check_file_reviewer']);
-        } else {
-            $first_model->check_file_cts = null;
-        }
-        if ($params['check_list_reviewer']) {
-            $first_model->check_list = implode(',', $params['check_list_reviewer']);
-        } else {
-            $first_model->check_list = null;
-        }
+
         $first_model->asignment = null;
         $first_model->ratio_assignment = 0;
         $first_model->ratio_check_file = FirstModel::RATIO_CHECK_FILE_SIM;
@@ -113,12 +106,49 @@ class FirstModelController extends Controller {
         }
 		$first_model->status = $params['status'];
 		$first_model->type = $params['type'];
-		if ($first_model->save()) {
+        $first_model->save();
+        if ($params['check_file_reviewer']) {
+            $check_file_cts = $params['check_file_reviewer'];
+            foreach ($check_file_cts as $file) {
+                try{
+                    $reviewModel = new ReviewerModel();
+                    $reviewModel->check_file = $file;
+                    $reviewModel->reviewer_name = Submission::getValueReviewer($file);
+                    $reviewModel->check_type = 2;
+                    $reviewModel->percent = FirstModel::getPercent($params['type'], count($check_file_cts));
+                    $reviewModel->first_model_id = $first_model->id;
+                    $reviewModel->save();
+                }
+                catch(\Exception $e){
+                    // do task when error
+                    echo $e->getMessage();   // insert query
+                }
+            }
+        }
+        if ($params['check_list_reviewer']) {
+            $check_list = $params['check_list_reviewer'];
+            foreach ($check_list as $list) {
+                try{
+                    $reviewModel2 = new ReviewerModel();
+                    $reviewModel2->check_list = $list;
+                    $reviewModel2->reviewer_name = Submission::getValueReviewer($list);
+                    $reviewModel2->check_type = 1;
+                    $reviewModel2->percent = FirstModel::getPercent($params['type'], count($check_list));
+                    $reviewModel2->first_model_id = $first_model->id;
+                    $reviewModel2->save();
+                }
+                catch(\Exception $e){
+                    // do task when error
+                    echo $e->getMessage();   // insert query
+                }
+            }
+        }
+//		if ($first_model->save()) {
 			return response()->json([
 				'status' => 200,
 				'message' => $message,
 			]);
-		}
+//		}
 	}
 
 	/**
