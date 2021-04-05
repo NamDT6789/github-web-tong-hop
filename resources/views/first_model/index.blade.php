@@ -103,9 +103,19 @@
                             </td>
                             <td>
                                 @if($item['type'] !=2 )
+                                    <ul style="border-bottom: 1px solid">
+                                        @foreach($item['check_file_cts'] as $r)
+                                            @if($r->check_type === 2)
+                                                <li>{{ $r->reviewer_name }}</li>
+                                                @endif
+                                            @endforeach
+                                    </ul>
                                     <ul>
-                                        <li>{!! $item['check_file_cts'] !!}</li>
-                                        <li>{!! $item['check_list'] !!}</li>
+                                        @foreach($item['check_list'] as $r)
+                                            @if($r->check_type === 1)
+                                                <li>{{ $r->reviewer_name }}</li>
+                                            @endif
+                                        @endforeach
                                     </ul>
                                 @else
                                     <ul>
@@ -116,13 +126,23 @@
                             <td>
                                 @if($item['type'] !=2 )
                                     <ul>
-                                        <li>{!! $item['ratio_check_file'].'%' !!}</li>
-                                        <li>{!! $item['ratio_check_list'].'%' !!}</li>
+                                        @foreach($item['check_file_cts'] as $r)
+                                            @if($r->check_type === 2)
+                                                <li>{!! $r->percent.'%' !!}</li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                    <ul>
+                                        @foreach($item['check_list'] as $r)
+                                            @if($r->check_type === 1)
+                                                <li>{!! $r->percent.'%' !!}</li>
+                                            @endif
+                                        @endforeach
                                     </ul>
                                 @else
-                                    <ul>
-                                        <li>{!! $item['ratio_assignment'].'%' !!}</li>
-                                    </ul>
+                                    {{--<ul>--}}
+                                        {{--<li>{!! $item['ratio_assignment'].'%' !!}</li>--}}
+                                    {{--</ul>--}}
                                 @endif
                             </td>
                             <td>{!! $item['status'] !!}</td>

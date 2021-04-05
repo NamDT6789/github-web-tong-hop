@@ -155,12 +155,24 @@ class Submission extends Model
      * @param null $key
      * @return mixed
      */
+
     public static function getValueReviewer($key = null)
     {
         if (array_key_exists($key, self::REVIEWER)) {
             return self::REVIEWER[$key];
         }
     }
+
+//    public static function getValueReviewerBySelect2($arrReviewer = [])
+//    {
+//        if ($arrReviewer) {
+//            foreach ($arrReviewer as $r) {
+//                if (array_key_exists($r, self::REVIEWER)) {
+//                    return self::REVIEWER[$r];
+//                }
+//            }
+//        }
+//    }
     /**
      * @param null $value
      * @return array
