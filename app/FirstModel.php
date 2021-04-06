@@ -35,7 +35,7 @@ class FirstModel extends Model
 		self::STATUS_APPROVAL => self::APPROVAL,
 	];
 
-	const RATIO_VARIANT = 20;
+	const RATIO_VARIANT = 10;
 	const RATIO_CHECK_FILE_SIM = 60;
 	const RATIO_CHECK_LIST_SIM = 40;
 	const RATIO_CHECK_FILE_FULL = 50;
