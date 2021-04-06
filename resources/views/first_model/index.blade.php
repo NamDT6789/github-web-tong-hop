@@ -119,7 +119,11 @@
                                     </ul>
                                 @else
                                     <ul>
-                                        <li>{!! $item['asignment'] !!}</li>
+                                        @foreach($item['ratio_assignment'] as $r)
+                                            @if($r->check_type === 3)
+                                                <li>{{ $r->reviewer_name }}</li>
+                                            @endif
+                                        @endforeach
                                     </ul>
                                 @endif
                             </td>
@@ -140,9 +144,13 @@
                                         @endforeach
                                     </ul>
                                 @else
-                                    {{--<ul>--}}
-                                        {{--<li>{!! $item['ratio_assignment'].'%' !!}</li>--}}
-                                    {{--</ul>--}}
+                                    <ul>
+                                        @foreach($item['ratio_assignment'] as $r)
+                                            @if($r->check_type === 3)
+                                                <li>{!! $r->percent.'%' !!}</li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
                                 @endif
                             </td>
                             <td>{!! $item['status'] !!}</td>
@@ -167,10 +175,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($total_reviewer as $items)
+                @foreach($total_reviewer as $item)
                     <tr>
-                        <td>{!! $items['name'] !!}</td>
-                        <td>{!! $items['total']. '%' !!}</td>
+                        <td>{{ $item->reviewer_name }}</td>
+                        <td>{!! $item->total. '%' !!}</td>
                     </tr>
                 @endforeach
                 </tbody>

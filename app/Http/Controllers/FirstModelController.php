@@ -51,7 +51,7 @@ class FirstModelController extends Controller {
 					'asignment' => Submission::getValueReviewer($item['asignment']),
 					'status' => FirstModel::getValueStatus($item['status']),
 					'type' => $item['type'],
-                    'ratio_assignment' => $item['ratio_assignment'],
+                    'ratio_assignment' => $item->reviewer_model,
                     'ratio_check_file' => $item['ratio_check_file'],
                     'ratio_check_list' => $item['ratio_check_list']
 				];
@@ -92,55 +92,73 @@ class FirstModelController extends Controller {
         $first_model->ratio_assignment = 0;
         $first_model->ratio_check_file = FirstModel::RATIO_CHECK_FILE_SIM;
         $first_model->ratio_check_list = FirstModel::RATIO_CHECK_LIST_SIM;
-		if ($params['type'] == 1) {
-            $first_model->ratio_check_file = FirstModel::RATIO_CHECK_FILE_FULL;
-            $first_model->ratio_check_list = FirstModel::RATIO_CHECK_LIST_FULL;
-        }
-        if ($params['type'] == 2) {
-            $first_model->check_file_cts = null;
-            $first_model->check_list = null;
-            $first_model->asignment = $params['asignment_reviewer'];
-            $first_model->ratio_assignment = FirstModel::RATIO_VARIANT;
-            $first_model->ratio_check_file = 0;
-            $first_model->ratio_check_list = 0;
-        }
+//		if ($params['type'] == 1) {
+//            $first_model->ratio_check_file = FirstModel::RATIO_CHECK_FILE_FULL;
+//            $first_model->ratio_check_list = FirstModel::RATIO_CHECK_LIST_FULL;
+//        }
+//        if ($params['type'] == 2) {
+//            $first_model->check_file_cts = null;
+//            $first_model->check_list = null;
+//            $first_model->asignment = $params['asignment_reviewer'];
+//            $first_model->ratio_assignment = FirstModel::RATIO_VARIANT;
+//            $first_model->ratio_check_file = 0;
+//            $first_model->ratio_check_list = 0;
+//        }
 		$first_model->status = $params['status'];
 		$first_model->type = $params['type'];
         $first_model->save();
-        if ($params['check_file_reviewer']) {
-            $check_file_cts = $params['check_file_reviewer'];
-            foreach ($check_file_cts as $file) {
-                try{
-                    $reviewModel = new ReviewerModel();
-                    $reviewModel->check_file = $file;
-                    $reviewModel->reviewer_name = Submission::getValueReviewer($file);
-                    $reviewModel->check_type = 2;
-                    $reviewModel->percent = FirstModel::getPercent($params['type'], count($check_file_cts));
-                    $reviewModel->first_model_id = $first_model->id;
-                    $reviewModel->save();
+        if ($params['type'] != '2') {
+            if ($params['check_file_reviewer']) {
+                $check_file_cts = $params['check_file_reviewer'];
+                foreach ($check_file_cts as $file) {
+                    try{
+                        $reviewModel = new ReviewerModel();
+                        $reviewModel->check_file = $file;
+                        $reviewModel->reviewer_name = Submission::getValueReviewer($file);
+                        $reviewModel->reviewer_id = $file;
+                        $reviewModel->check_type = 2;
+                        $reviewModel->percent = FirstModel::getPercent($params['type'], count($check_file_cts));
+                        $reviewModel->first_model_id = $first_model->id;
+                        $reviewModel->save();
+                    }
+                    catch(\Exception $e){
+                        // do task when error
+                        echo $e->getMessage();   // insert query
+                    }
                 }
-                catch(\Exception $e){
-                    // do task when error
-                    echo $e->getMessage();   // insert query
+            }
+            if ($params['check_list_reviewer']) {
+                $check_list = $params['check_list_reviewer'];
+                foreach ($check_list as $list) {
+                    try{
+                        $reviewModel2 = new ReviewerModel();
+                        $reviewModel2->check_list = $list;
+                        $reviewModel2->reviewer_name = Submission::getValueReviewer($list);
+                        $reviewModel->reviewer_id = $list;
+                        $reviewModel2->check_type = 1;
+                        $reviewModel2->percent = FirstModel::getPercent($params['type'], count($check_list));
+                        $reviewModel2->first_model_id = $first_model->id;
+                        $reviewModel2->save();
+                    }
+                    catch(\Exception $e){
+                        // do task when error
+                        echo $e->getMessage();   // insert query
+                    }
                 }
             }
         }
-        if ($params['check_list_reviewer']) {
-            $check_list = $params['check_list_reviewer'];
-            foreach ($check_list as $list) {
-                try{
-                    $reviewModel2 = new ReviewerModel();
-                    $reviewModel2->check_list = $list;
-                    $reviewModel2->reviewer_name = Submission::getValueReviewer($list);
-                    $reviewModel2->check_type = 1;
-                    $reviewModel2->percent = FirstModel::getPercent($params['type'], count($check_list));
-                    $reviewModel2->first_model_id = $first_model->id;
-                    $reviewModel2->save();
-                }
-                catch(\Exception $e){
-                    // do task when error
-                    echo $e->getMessage();   // insert query
-                }
+        if ($params['type'] === '2') {
+            try {
+                $reviewModel3 = new ReviewerModel();
+                $reviewModel3->reviewer_name = Submission::getValueReviewer($params['asignment_reviewer']);
+                $reviewModel3->check_type = 3;
+                $reviewModel3->percent = FirstModel::RATIO_VARIANT;
+                $reviewModel3->first_model_id = $first_model->id;
+                $reviewModel3->save();
+            }
+            catch(\Exception $e){
+                // do task when error
+                echo $e->getMessage();   // insert query
             }
         }
 //		if ($first_model->save()) {
@@ -173,26 +191,29 @@ class FirstModelController extends Controller {
 
     protected function getTotalReviewer()
     {
-        $total = 'SELECT t.name, SUM(t.total) as totalReviewer FROM 
-                    (SELECT name, total FROM (SELECT asignment as name, SUM(ratio_assignment) as total FROM first_model GROUP BY asignment) as a 
-                     UNION ALL 
-                     SELECT name, total FROM (SELECT check_file_cts as name, SUM(ratio_check_file) as total FROM first_model GROUP BY check_file_cts) as b
-                     UNION ALL
-                     SELECT name, total FROM (SELECT check_list as name, SUM(	ratio_check_list) as total FROM first_model GROUP BY check_list) as c
-                    ) as t GROUP BY t.name';
+//        $total = 'SELECT t.name, SUM(t.total) as totalReviewer FROM
+//                    (SELECT name, total FROM (SELECT asignment as name, SUM(ratio_assignment) as total FROM first_model GROUP BY asignment) as a
+//                     UNION ALL
+//                     SELECT name, total FROM (SELECT check_file_cts as name, SUM(ratio_check_file) as total FROM first_model GROUP BY check_file_cts) as b
+//                     UNION ALL
+//                     SELECT name, total FROM (SELECT check_list as name, SUM(	ratio_check_list) as total FROM first_model GROUP BY check_list) as c
+//                    ) as t GROUP BY t.name';
+        $total = 'SELECT * ,SUM(percent) as total from reviewer_connect GROUP by  reviewer_name';
 
         $totalReview = DB::select($total);
-        $data = [];
-        foreach ($totalReview as $items) {
-            if ($items->name != null) {
-                $data[] = [
-                    'name' => Submission::getValueReviewer($items->name),
-                    'total' => $items->totalReviewer
-                ];
-            }
-
-        }
-        return $data;
+//        @dd($totalReview);
+//        $data = [];
+//        foreach ($totalReview as $items) {
+//            if ($items->name != null) {
+//                $data[] = [
+//                    'name' => Submission::getValueReviewer($items->name),
+//                    'total' => $items->totalReviewer
+//                ];
+//            }
+//
+//        }
+//        return $data;
+        return $totalReview;
     }
 	public function importFirst() 
     {
