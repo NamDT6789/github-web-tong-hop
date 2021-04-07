@@ -134,7 +134,7 @@ class FirstModelController extends Controller {
                         $reviewModel2 = new ReviewerModel();
                         $reviewModel2->check_list = $list;
                         $reviewModel2->reviewer_name = Submission::getValueReviewer($list);
-                        $reviewModel->reviewer_id = $list;
+                        $reviewModel2->reviewer_id = $list;
                         $reviewModel2->check_type = 1;
                         $reviewModel2->percent = FirstModel::getPercent($params['type'], count($check_list));
                         $reviewModel2->first_model_id = $first_model->id;
@@ -152,6 +152,7 @@ class FirstModelController extends Controller {
                 $reviewModel3 = new ReviewerModel();
                 $reviewModel3->reviewer_name = Submission::getValueReviewer($params['asignment_reviewer']);
                 $reviewModel3->check_type = 3;
+				$reviewModel3->reviewer_id = $params['asignment_reviewer'];
                 $reviewModel3->percent = FirstModel::RATIO_VARIANT;
                 $reviewModel3->first_model_id = $first_model->id;
                 $reviewModel3->save();
