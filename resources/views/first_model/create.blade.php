@@ -50,6 +50,7 @@
 	                    	<div id="type_all">
 	                    		<div class="col-md-6">
 		                    		<div class="form-group">
+<!--										--><?php //dd($reviewer) ?>
 										<label>Check file & CTS-V</label>
 										<br />
 										<!--<select class="form-control" name="check_file_reviewer" id="check_file" onchange ="removeReviewer()">-->
