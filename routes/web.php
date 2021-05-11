@@ -26,6 +26,8 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::group(['prefix' => 'first_model'], function () {
 		Route::get('/index', 'FirstModelController@index')->name('first_model');
+        Route::get('/edit-percent/{id}', 'FirstModelController@editPercent')->name('first_model.editPercent');
+        Route::post('/store-percent/{id}', 'FirstModelController@storePercent')->name('first_model.storePercent');
 		Route::post('/create', 'FirstModelController@createOrUpdate')->name('first_model.createOrUpdate');
 		Route::post('/update/{id}', 'FirstModelController@createOrUpdate')->name('first_model.update');
 		Route::post('/destroy/{id}', 'FirstModelController@destroy')->name('first_model.destroy');

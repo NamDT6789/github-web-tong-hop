@@ -99,10 +99,11 @@ table.table td a:hover {
 }
 table.table td a.edit {
 	color: #FFC107;
-	margin-right: 10px;
+	margin-right: 3px;
 }
 table.table td a.delete {
     color: #F44336;
+	margin-right: 3px;
 }
 table.table td i {
     font-size: 19px;
@@ -319,4 +320,19 @@ ul li{
 
 .modal .modal-body #type_all .sub-select2 .select2-container {
 	width: 100%;
+}
+
+.list-reviewer {
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+.list-reviewer .form-group {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.list-reviewer .form-group .form-control {
+	width: 250px;
 }

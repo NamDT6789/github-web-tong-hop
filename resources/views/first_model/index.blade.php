@@ -78,11 +78,13 @@
                     @foreach($first_model as $item)
                         <?php $index++;?>
                         <tr>
-                            <td>
+                            <td style="padding: 4px">
                                 <a class="edit" href="#addFirstModel" data-toggle="modal" data-id="{!! $item['id'] !!}"><span
                                             class="glyphicon glyphicon-pencil" data-toggle="tooltip"></span></a>
                                 <a class="delete" href="#deleteEmployeeModal" data-toggle="modal" data-id="{!! $item['id'] !!}"><span
                                             class="glyphicon glyphicon-trash" data-toggle="tooltip"></span></a>
+                                <a class="edit-percent" href="{!! route('first_model.editPercent', $item['id']) !!}" data-toggle="modal"><span
+                                            class="glyphicon glyphicon-user" data-toggle="tooltip"></span></a>
                             </td>
                             <td>{!! $index !!}</td>
                             <td>{!! $item['submission_id'] !!}</td>
@@ -235,11 +237,25 @@
         });
         $('.edit').on('click', function () {
             var id = $(this).data('id');
+            // var selectedValues = new Array();
             $.ajax({
                 type: 'GET',
                 url: '/first_model/update/' + id,
                 data: {},
                 success: function (data) {
+                    console.log(data);
+                    // $.each(data.reviewer, function(index, value) {
+                    //     // alert(index);
+                    //     if (value.check_type === 2) {
+                    //         selectedValues.push(parseInt(value.check_file));
+                    //         // var $option = $("<option selected></option>").val(value.check_file).text(value.reviewer_name);
+                    //         // $('#addFirstModel').find('#check_file').append($option).trigger('change');
+                    //         $('#addFirstModel').find('#check_file').val(selectedValues);
+                    //     }
+                    //     console.log(selectedValues);
+                    //
+                    // });
+
 
                     $('#addFirstModel').find('#btn-submit').data('id', id);
                     $('#addFirstModel').find('#submission_id').val(data.submission_id);
@@ -251,11 +267,16 @@
                     $('#addFirstModel').find('#asignment_reviewer').val(data.asignment);
                     $('#addFirstModel').find('#status').val(data.status);
                     if (data.type === 1) {
+                        $('#addFirstModel').find('#fullFM').prop('checked', true);
                         $('#simplifiedFM').prop('checked', false);
                         $('#fullFM').prop('checked', true);
                         $('#variant').prop('checked', false);
                     }
+                    if (data.type === 0) {
+                        $('#addFirstModel').find('#simplifiedFM').prop('checked', true);
+                    }
                     if (data.type === 2) {
+                        $('#addFirstModel').find('#variant').prop('checked', true);
                         $('#simplifiedFM').prop('checked', false);
                         $('#fullFM').prop('checked', false);
                         $('#variant').prop('checked', true);
@@ -264,6 +285,37 @@
                     }
                 }
             });
+        //     $('#addFirstModel').find('#check_file').select2({
+        //         tags: true,
+        //         multiple: true,
+        //         tokenSeparators: [',', ' '],
+        //         minimumInputLength: 2,
+        //         minimumResultsForSearch: 10,
+        //         ajax: {
+        //             url: '/first_model/update/' + id,
+        //             dataType: "json",
+        //             type: "GET",
+        //             data: function (params) {
+        //                 console.log(params, '333');
+        //
+        //                 var queryParameters = {
+        //                     term: params.term
+        //                 }
+        //                 return queryParameters;
+        //             },
+        //             processResults: function (data) {
+        //                 console.log(data);
+        //                 return {
+        //                     results: $.map(data, function (item) {
+        //                         return {
+        //                             text: item.tag_value,
+        //                             id: item.tag_id
+        //                         }
+        //                     })
+        //                 };
+        //             }
+        //         }
+        //     });
         });
         $('.delete').on('click', function () {
             var id = $(this).data('id');
